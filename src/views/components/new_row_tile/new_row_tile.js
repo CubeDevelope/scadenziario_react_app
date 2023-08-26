@@ -1,11 +1,41 @@
+import { useEffect, useState } from "react";
 import "./new_row_tile.css";
-import { MdAdd } from "react-icons/md";
+import { NewRowDialog } from "../dialogs/new_row_dialog";
 
+export default function NewRowTile({ onPressed }) {
+  const [visible, setVisibility] = useState(false);
 
-export default function NewRowTile() {
+  useEffect(() => {
+    const dialog = document.getElementById("insertRowDialog");
+
+    if (visible) {
+      dialog.classList.remove("notVisible");
+    } else {
+      dialog.classList.add("notVisible");
+    }
+  }, [visible]);
+
   return (
-    <div id="tile">
-      <MdAdd/> Aggiungi riga
+    <div>
+      <div id="new_row_tile">
+        <button
+          id="new_row_button"
+          onClick={() => {
+            setVisibility(true);
+          }}
+        >
+          Aggiungi riga
+        </button>
+      </div>
+      <NewRowDialog
+        confermCallback={(activity) => {
+          onPressed(activity);
+          setVisibility(false);
+        }}
+        callback={() => {
+          setVisibility(false);
+        }}
+      />
     </div>
   );
 }

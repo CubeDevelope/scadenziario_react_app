@@ -1,6 +1,12 @@
-#tile {
-    border: 1px solid white;
-    padding-left: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
+#new_row_tile {
+    display: flex;
+    flex-direction: row-reverse;
 }
+
+#new_row_button {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+} 

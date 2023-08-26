@@ -5,7 +5,7 @@ class Operator {
   }
 
   static fromJson(map) {
-    return new Operator(map[0].value, map[1].value);
+    return new Operator(map["uid"], map["name"]);
   }
 
   toJson() {

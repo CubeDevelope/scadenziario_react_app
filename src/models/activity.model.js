@@ -1,4 +1,4 @@
-export class Activity {
+export default class Activity {
   constructor(
     date,
     name,
@@ -8,7 +8,6 @@ export class Activity {
     operator,
     progress,
     notes,
-    urgency
   ) {
     this.date = date;
     this.name = name;
@@ -18,6 +17,5 @@ export class Activity {
     this.operator = operator;
     this.progress = progress;
     this.notes = notes;
-    this.urgency = urgency;
   }
 }

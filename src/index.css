@@ -7,8 +7,43 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #3c3c3c;
   color: white;
+}
+
+body {
+  display: flex;
+  background-color: #3c3c3c;
+}
+
+button {
+  height: 40px;
+  padding: 8px 16px;
+  margin: 16px 0;
+  border: none;
+  border-radius: 8px;
+}
+
+.secondaryButton {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.buttonContainer {
+  height: 40px;
+}
+
+input[type="text"], input[type="date"] {
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid black;
+  padding: 0 8px
+}
+
+
+button:hover {
+  cursor: pointer;
+  color: #aaa;
 }
 
 code {

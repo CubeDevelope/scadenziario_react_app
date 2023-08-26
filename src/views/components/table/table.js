@@ -1,28 +1,21 @@
-import { Activity } from "../../models/activity.model";
 import { TableHeader, TableRow } from "../table_row/table_row";
-import { useState, useEffect } from "react";
 
 import "./table.css";
 
-export function Table() {
-  const [activities, setActivities] = useState([]);
-
-  useEffect(() => {
-    createRows();
-  }) 
-
-  function createRows() {
-    activities.forEach((element) => {
-      rows.push(<TableRow activity={element}></TableRow>);
-    });
-  }
-
+export default function Table({ activities }) {
   let rows = [];
+
+  activities.forEach((element) => {
+    rows.push(<TableRow activity={element}></TableRow>);
+  });
 
   return (
     <table>
-      <TableHeader></TableHeader>
-      {rows}
+      <thead>
+        <TableHeader></TableHeader>
+      </thead>
+
+      <tbody>{rows}</tbody>
     </table>
   );
 }
