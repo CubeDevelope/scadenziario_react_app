@@ -1,24 +1,49 @@
-.app {
+.overflow_dialog_background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
   width: 100vw;
-  height: 100vh;
-  display: flex;
-}
-
-.aside {
-  width: max(200px, 15%);
-  height: 100vh;
-  background-color: rebeccapurple;
-}
-
-.table_section {
-  flex: 1;
+  background-color: #333c;
+  z-index: 3;
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.2s;
 }
 
-@media screen and (max-width: 1000px) {
-  .aside {
-    display: none;
-  }
+.visible {
+  visibility: visible;
+}
+
+.notVisible {
+  visibility: hidden;
+}
+
+.table_container {
+  z-index: 0;
+  width: 100vw;
+  height: 100%;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1.5rem;
+}
+
+.loading {
+  z-index: 0;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+#hamburgerMenu {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  margin-left: 1.5rem;
+  margin-top: 1.5rem;
+  z-index: 9;
 }

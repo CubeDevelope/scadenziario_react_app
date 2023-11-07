@@ -1,0 +1,18 @@
+#operation_bar {
+  width: 100%;
+  column-gap: 16px;
+  display: flex;
+}
+
+#operation_bar button {
+  margin-top: 8px;
+}
+
+.showBar {
+    height: max-content;
+}
+
+.hideBar {
+  height: 0;
+  visibility: hidden;
+}

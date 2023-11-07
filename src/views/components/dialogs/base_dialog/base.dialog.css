@@ -1,0 +1,62 @@
+.dialog {
+  position: absolute;
+  min-height: 40px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  min-width: min(1000px, 70%);
+  height: max-content;
+  z-index: 10;
+  border-radius: 16px;
+  padding: 16px;
+  color: black;
+  transition: all .2s;
+
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 1rem;
+    column-gap: 16px;
+}
+
+.dialog select {
+  font-weight: bold;
+  padding: 0 8px;
+  border: 1px solid var(--var-tablehead-color);
+
+  width: 100%;
+  min-height: 40px;
+  border-radius: 8px;
+}
+
+.spacing {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  margin: 16px 0;
+}
+
+input[type="text"],
+input[type="date"] {
+  width: 100%;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 8px;
+  border: 1px solid var(--var-tablehead-color);
+}
+
+.dialog label {
+  color: black;
+  font-weight: 600;
+  margin-left: 4px;
+  font-size: 0.9rem;
+}
+
+.dialogTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+}

@@ -1,11 +1,11 @@
-class Recurrence {
+export default class Recurrence {
     constructor(uid, name) {
       this.uid = uid;
       this.name = name;
     }
   
     static fromJson(map) {
-      return new Procedure(map['uid'], map['name']);
+      return new Recurrence(map['uid'], map['name']);
     }
   
     toJson() {
@@ -16,5 +16,4 @@ class Recurrence {
     }
   }
   
-  module.exports = Recurrence;
   

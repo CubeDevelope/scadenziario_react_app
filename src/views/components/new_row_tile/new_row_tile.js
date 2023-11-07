@@ -1,41 +1,54 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import "./new_row_tile.css";
-import { NewRowDialog } from "../dialogs/new_row_dialog";
+import {
+  ShowDialogContext,
+} from "../../../business_logic/context/app_context";
+import {
+  CreateActivityDialogState,
+  CreateOperatorDialogState,
+  CreateProcedureDialogState,
+} from "../dialogs/dialog_states";
 
-export default function NewRowTile({ onPressed }) {
-  const [visible, setVisibility] = useState(false);
-
-  useEffect(() => {
-    const dialog = document.getElementById("insertRowDialog");
-
-    if (visible) {
-      dialog.classList.remove("notVisible");
-    } else {
-      dialog.classList.add("notVisible");
-    }
-  }, [visible]);
+export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
+  const dialogContext = useContext(ShowDialogContext);
 
   return (
-    <div>
-      <div id="new_row_tile">
+    <div id="new_row_tile" className={className}>
+      <div>
         <button
           id="new_row_button"
+          className="primaryButton"
           onClick={() => {
-            setVisibility(true);
+            dialogContext(new CreateActivityDialogState());
           }}
         >
-          Aggiungi riga
+          Inserisci nuova attività
+        </button>
+        <button
+          className="secondaryButton"
+          onClick={() => {
+            dialogContext(new CreateProcedureDialogState());
+          }}
+        >
+          Inserisci nuova procedura
+        </button>
+        <button
+          className="secondaryButton"
+          onClick={() => {
+            dialogContext(new CreateOperatorDialogState());
+          }}
+        >
+          Inserisci nuovo operatore
         </button>
       </div>
-      <NewRowDialog
-        confermCallback={(activity) => {
-          onPressed(activity);
-          setVisibility(false);
+      <button
+        className="secondaryButton"
+        onClick={() => {
+          onHistoryPressed?.call();
         }}
-        callback={() => {
-          setVisibility(false);
-        }}
-      />
+      >
+        {!isArchive ? "Attività aperte" : "Archivio attività"}
+      </button>
     </div>
   );
 }

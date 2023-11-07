@@ -1,5 +1,8 @@
-const { createContext } = require("react");
+import { createContext } from "react";
 
 const AppContext = createContext(null);
 
-module.exports = AppContext;
+const ShowDialogContext = createContext(false);
+
+const ActivitiesContext = createContext(null);
+export { AppContext, ShowDialogContext, ActivitiesContext };

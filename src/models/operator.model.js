@@ -1,4 +1,4 @@
-class Operator {
+export default class Operator {
   constructor(uid, name) {
     this.name = name;
     this.uid = uid;
@@ -16,4 +16,3 @@ class Operator {
   }
 }
 
-module.exports = Operator;

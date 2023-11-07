@@ -1,0 +1,20 @@
+/*Drawer*/
+#drawer {
+  width: var(--drawer-width);
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  background-color: var(--var-scad-backcolor);
+  position: absolute;
+  z-index: 5;
+  transition: all 0.3s;
+}
+
+.drawerOpened {
+  left: 0;
+}
+
+.drawerClosed {
+  left: calc(var(--drawer-width) * -1);
+}
+

@@ -1,0 +1,44 @@
+.dot {
+  position: absolute;
+  bottom: 50%;
+  transform: translate(-50%, 50%);
+  height: 20px;
+  width: 20px;
+  left: 50%;
+  border-radius: 50%;
+}
+
+.redDot {
+  background-color: red;
+}
+
+.yellowDot {
+  background-color: #f5e402;
+  border: 1px solid var(--var-tablehead-color);
+}
+
+.orangeDot {
+  background-color: orange;
+}
+
+.greenDot {
+  background-color: green;
+}
+
+.filter {
+  width: 10px;
+  height: 20px;
+  background-color: black;
+  display: none;
+}
+
+.filterText {
+  flex: 1;
+  font-size: 15px;
+}
+
+.filterColumn {
+  display: flex;
+  align-items: center;
+}
+

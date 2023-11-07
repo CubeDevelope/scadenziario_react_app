@@ -1,21 +1,15 @@
-import { TableHeader, TableRow } from "../table_row/table_row";
 
 import "./table.css";
 
-export default function Table({ activities }) {
-  let rows = [];
-
-  activities.forEach((element) => {
-    rows.push(<TableRow activity={element}></TableRow>);
-  });
+export default function Table({ children, header}) {
 
   return (
     <table>
       <thead>
-        <TableHeader></TableHeader>
+      {header}
       </thead>
 
-      <tbody>{rows}</tbody>
+      <tbody>{children}</tbody>
     </table>
   );
 }

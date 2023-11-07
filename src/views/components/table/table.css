@@ -1,22 +1,64 @@
-tr, th, td {
-    border: 1px solid white;
-    text-align: center;
-}
-
-th {
-    padding: 0 16px;
-}
-
 table {
-    border-collapse: collapse;
-    max-width: 1200px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background-color: var(--var-tablehead-color);
+  height: 60px;
 }
 
 td {
-    height: 30px;
+  max-width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 3em;
+  padding: 8px;
+  border: 1px solid var(--var-tablehead-color);
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
 }
 
-td input {
-  height: 100%;  
+th:hover {
+  cursor: pointer;
+}
+
+.deleteRow {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+}
+
+.deleteRow:hover {
+  cursor: pointer;
+}
+
+.centerElement {
+  display: block;
+  justify-content: center;
+  align-content: center;
+}
+
+select {
   width: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: black;
+}
+
+option {
+  background-color: white;
+  color: black;
+}
+
+
+.selectedRow{
+  background-color: #dbe6f2;
+}
+
+.grey-row {
+  background-color: #f2f2f2;
 }
