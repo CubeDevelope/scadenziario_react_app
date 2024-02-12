@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { updateActivity } from "../../../../../business_logic/network.repository";
 import {
   createOptions,
@@ -6,26 +5,29 @@ import {
 import { BaseDialog } from "../../base_dialog/base.dialog";
 import { TitleDialogElement } from "../../components/title_dialog_element.component";
 import { EditActivityDialogState } from "../../dialog_states";
-import { AppContext } from "../../../../../business_logic/context/app_context";
+import { useSelector } from "react-redux";
+import { selectConstants } from "../../../../../store/store";
 
 export function EditActivityDialog({
   state = new EditActivityDialogState(),
+  onCancelClick, 
   onConfirmCallback,
 }) {
   const activity = state.elementToEdit;
   var deadlineSelected = activity.deadline;
 
-  const data = useContext(AppContext).constantData;
+  const data = useSelector(selectConstants);
 
   return (
     <BaseDialog
       onConfirmCallback={onConfirmCallback}
       onSaveButton={() => {
         updateActivity(activity);
+        onCancelClick();
       }}
       actions={() => {
         return (
-          <button className="secondaryButton" onClick={onConfirmCallback}>
+          <button className="secondaryButton" onClick={onCancelClick}>
             Annulla
           </button>
         );

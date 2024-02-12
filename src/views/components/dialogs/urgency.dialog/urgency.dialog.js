@@ -1,4 +1,4 @@
-import {useContext } from "react";
+import { useContext } from "react";
 import {
   dateFormatter,
   findElementInList,
@@ -8,13 +8,15 @@ import { TableRow } from "../../table/rows/table.row";
 import Table from "../../table/table";
 import { BaseDialog } from "../base_dialog/base.dialog";
 import { AppContext } from "../../../../business_logic/context/app_context";
+import { useSelector } from "react-redux";
+import { selectConstants } from "../../../../store/store";
 
 export function UrgencyDialog({ confirmCallback, activities = [] }) {
-  const data = useContext(AppContext).constantData;
+  const data = useSelector(selectConstants);
 
   return (
     <BaseDialog
-      onConfirmCallback={confirmCallback}
+      onSaveButton={confirmCallback}
       buttonTitle="Chiudi"
       title="Urgenza"
     >

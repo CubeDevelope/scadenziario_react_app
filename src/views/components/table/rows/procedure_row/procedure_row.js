@@ -4,13 +4,15 @@ import { TableRow } from "../table.row";
 import { DeleteDialogState } from "../../../dialogs/dialog_states";
 import { deleteProcedure } from "../../../../../business_logic/network.repository";
 import { findElementInList } from "../../../../../business_logic/utils";
+import { useSelector } from "react-redux";
+import { selectConstants } from "../../../../../store/store";
+import { dialogSlice } from "../../../../../store/slices/dialog.slice";
 
-export function ProcedureRow({ procedure, isEven }) {
+export function ProcedureRow({ procedure, isEven, dispatch}) {
 
-  const data = useContext(AppContext)["constantData"];
+  const data = useSelector(selectConstants);
 
   const [selectedRow, setSelectedRow] = useState(false);
-  const showDialog = useContext(ShowDialogContext);
 
   return (
     <TableRow className={!selectedRow ? isEven && "grey-row" : "selectedRow"}>
@@ -28,11 +30,11 @@ export function ProcedureRow({ procedure, isEven }) {
       <td
         className="pointer"
         onClick={() => {
-          showDialog(
-            new DeleteDialogState(() => {
+          dispatch(dialogSlice.actions.deleteAlert(
+            () => {
               deleteProcedure(procedure.uid);
-            })
-          );
+            }
+          ))
         }}
       >
         <span class="material-symbols-outlined">delete</span>

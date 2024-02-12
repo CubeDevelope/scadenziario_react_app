@@ -1,16 +1,18 @@
 import { BaseDialog } from "../base_dialog/base.dialog";
 import { DeleteDialogState } from "../dialog_states";
 
-export function AlertDialog({ closeDialog, onConfirmButton, state = DeleteDialogState}) {
+export function AlertDialog({ onCancelClick, state = DeleteDialogState}) {
   return (
     <BaseDialog
-      onConfirmCallback={onConfirmButton}
-      onSaveButton={state.callback}
+      onSaveButton={() => {
+        state.callback();
+        onCancelClick();
+      }}
       title={state.code}
       buttonTitle={state.code}
       actions={() => {
         return (
-          <button className="secondaryButton" onClick={closeDialog}>
+          <button className="secondaryButton" onClick={onCancelClick}>
             Annulla
           </button>
         );

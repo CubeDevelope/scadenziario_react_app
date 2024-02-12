@@ -1,14 +1,15 @@
 import { useContext, useState } from "react";
 import "./new_activity_dialog.css";
 import Activity from "../../../../models/activity.model";
-import { AppContext } from "../../../../business_logic/context/app_context";
 import { BaseDialog } from "../base_dialog/base.dialog";
 import { createOptions } from "../../../../business_logic/utils";
 import { TitleDialogElement } from "../components/title_dialog_element.component";
 import { createNewActivity } from "../../../../business_logic/network.repository";
+import { useSelector } from "react-redux";
+import { selectConstants } from "../../../../store/store";
 
-export function NewActivityDialog({confermCallback }) {
-  const data = useContext(AppContext)["constantData"];
+export function NewActivityDialog({confermCallback, onCancelClick }) {
+  const data = useSelector(selectConstants);
 
   const [officeActivity, setOfficeActivity] = useState(false);
 
@@ -19,18 +20,24 @@ export function NewActivityDialog({confermCallback }) {
   activity.operatorId = data.operators[0].uid;
   activity.recurrenceId = data.recurrence[0].uid;
 
-  var deadlineSelected = activity.deadline;
 
   return (
     <BaseDialog
       title="Nuova attività"
+      actions={() => {
+        return (
+          <button className="secondaryButton" onClick={onCancelClick}>
+            Annulla
+          </button>
+        );
+      }}
       onConfirmCallback={confermCallback}
       onSaveButton={() => {
         if (officeActivity) activity.recurrenceId = null;
         else activity.alternativeName = null;
 
         createNewActivity(activity)
-
+        onCancelClick();
       }}
     >
       <TitleDialogElement id="procedures" title="Nome procedura">
@@ -74,13 +81,11 @@ export function NewActivityDialog({confermCallback }) {
         })}
       </TitleDialogElement>
 
-      <TitleDialogElement id="operators" title="Entro quando va fatto">
+      <TitleDialogElement id="deadline" title="Entro quando va fatto?">
         <input
           type="date"
           id="deadlineDatePicker"
-          value={deadlineSelected}
           onChange={(e) => {
-            deadlineSelected = Date.parse(e.target.value);
             activity.deadline = Date.parse(e.target.value);
           }}
         />

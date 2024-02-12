@@ -4,19 +4,25 @@ import { BaseDialog } from "../base_dialog/base.dialog";
 import { TitleDialogElement } from "../components/title_dialog_element.component";
 import "./new_operator.dialog.css";
 
-export function NewOperatorDialog({ confermCallback, saveStatusCallback }) {
+export function NewOperatorDialog({onCancelClick }) {
   var operatorName = "";
 
   return (
     <BaseDialog
-      onConfirmCallback={confermCallback}
+      actions={() => {
+        return (
+          <button className="secondaryButton" onClick={onCancelClick}>
+            Annulla
+          </button>
+        );
+      }}
       onSaveButton={async () => {
         if (operatorName.length !== 0) {
           const operator = new Operator();
           operator.name = operatorName;
 
           createNewOperator(operator, () => {
-            saveStatusCallback?.call();
+            onCancelClick();
           });
         }
       }}

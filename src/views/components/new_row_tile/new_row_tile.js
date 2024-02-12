@@ -1,17 +1,12 @@
-import { useContext } from "react";
 import "./new_row_tile.css";
-import {
-  ShowDialogContext,
-} from "../../../business_logic/context/app_context";
-import {
-  CreateActivityDialogState,
-  CreateOperatorDialogState,
-  CreateProcedureDialogState,
-} from "../dialogs/dialog_states";
+import { dialogSlice } from "../../../store/slices/dialog.slice";
 
-export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
-  const dialogContext = useContext(ShowDialogContext);
-
+export default function NewRowTile({
+  isArchive,
+  onHistoryPressed,
+  className,
+  dispatch,
+}) {
   return (
     <div id="new_row_tile" className={className}>
       <div>
@@ -19,7 +14,7 @@ export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
           id="new_row_button"
           className="primaryButton"
           onClick={() => {
-            dialogContext(new CreateActivityDialogState());
+            dispatch(dialogSlice.actions.createActivity());
           }}
         >
           Inserisci nuova attività
@@ -27,7 +22,7 @@ export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
         <button
           className="secondaryButton"
           onClick={() => {
-            dialogContext(new CreateProcedureDialogState());
+            dispatch(dialogSlice.actions.createProcedure());
           }}
         >
           Inserisci nuova procedura
@@ -35,7 +30,7 @@ export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
         <button
           className="secondaryButton"
           onClick={() => {
-            dialogContext(new CreateOperatorDialogState());
+            dispatch(dialogSlice.actions.createOperator());
           }}
         >
           Inserisci nuovo operatore
@@ -44,7 +39,7 @@ export default function NewRowTile({ isArchive, onHistoryPressed, className }) {
       <button
         className="secondaryButton"
         onClick={() => {
-          onHistoryPressed?.call();
+          if (onHistoryPressed != null) onHistoryPressed(!isArchive);
         }}
       >
         {!isArchive ? "Attività aperte" : "Archivio attività"}

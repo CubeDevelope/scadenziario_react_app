@@ -3,7 +3,6 @@ import "./base.dialog.css";
 export function BaseDialog({
   children,
   actions,
-  onConfirmCallback,
   onSaveButton,
   title = "",
   buttonTitle = "Salva",
@@ -25,7 +24,6 @@ export function BaseDialog({
           className="primaryButton"
           onClick={() => {
             onSaveButton?.call();
-            onConfirmCallback?.call();
           }}
         >
           {buttonTitle}

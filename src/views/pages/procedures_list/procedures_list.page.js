@@ -3,9 +3,13 @@ import { TableHeader } from "../../components/table/headers/table.header";
 import Table from "../../components/table/table";
 import { AppContext } from "../../../business_logic/context/app_context";
 import { ProcedureRow } from "../../components/table/rows/procedure_row/procedure_row";
+import { useDispatch, useSelector } from "react-redux";
+import { selectProcedures } from "../../../store/store";
 
-export function ProceduresListPage() {
-  const procedures = useContext(AppContext).constantData.procedures;
+export function ProceduresList() {
+  const procedures = useSelector(selectProcedures);
+
+  const dispatch = useDispatch();
 
   return (
     <Table
@@ -16,7 +20,6 @@ export function ProceduresListPage() {
 
           <th></th>
           <th></th>
-
         </TableHeader>
       }
     >
@@ -25,6 +28,7 @@ export function ProceduresListPage() {
           <ProcedureRow
             procedure={procedure}
             isEven={procedures.indexOf(procedure) % 2 === 0}
+            dispatch={dispatch}
           />
         );
       })}

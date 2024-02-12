@@ -10,6 +10,17 @@
 
 .redDot {
   background-color: red;
+  animation: flashDot 500ms linear infinite alternate-reverse;
+}
+
+@keyframes flashDot {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: .2;
+  }
 }
 
 .yellowDot {

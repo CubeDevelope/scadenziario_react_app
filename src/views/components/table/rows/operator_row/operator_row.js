@@ -3,10 +3,10 @@ import { ShowDialogContext } from "../../../../../business_logic/context/app_con
 import { TableRow } from "../table.row";
 import { DeleteDialogState } from "../../../dialogs/dialog_states";
 import { deleteOperator } from "../../../../../business_logic/network.repository";
+import { dialogSlice } from "../../../../../store/slices/dialog.slice";
 
-export function OperatorRow({ operator, isEven }) {
+export function OperatorRow({ operator, isEven, dispatch}) {
   const [selectedRow, setSelectedRow] = useState(false);
-  const showDialog = useContext(ShowDialogContext);
 
   return (
     <TableRow className={!selectedRow ? isEven && "grey-row" : "selectedRow"}>
@@ -24,11 +24,11 @@ export function OperatorRow({ operator, isEven }) {
       <td
         className="pointer"
         onClick={() => {
-          showDialog(
-            new DeleteDialogState(() => {
+          dispatch(dialogSlice.actions.deleteAlert(
+            () => {
               deleteOperator(operator.uid);
-            })
-          );
+            }
+          ))
         }}
       >
         <span class="material-symbols-outlined">delete</span>

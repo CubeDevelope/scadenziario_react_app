@@ -6,16 +6,27 @@ import "./new_procedure.dialog.css";
 import { createOptions } from "../../../../business_logic/utils";
 import { createNewProcedure } from "../../../../business_logic/network.repository";
 import { Procedure } from "../../../../models/procedure.model";
+import { useSelector } from "react-redux";
+import { selectConstants } from "../../../../store/store";
 
-export function NewProcedureDialog({ confermCallback, saveStatusCallback }) {
-  const data = useContext(AppContext)["constantData"];
+export function NewProcedureDialog({
+  saveStatusCallback,
+  onCancelClick,
+}) {
+  const data = useSelector(selectConstants)
 
   var procedureName = "";
   var procedureType = 1;
 
   return (
     <BaseDialog
-      onConfirmCallback={confermCallback}
+      actions={() => {
+        return (
+          <button className="secondaryButton" onClick={onCancelClick}>
+            Annulla
+          </button>
+        );
+      }}
       onSaveButton={() => {
         if (procedureName.length !== 0) {
           const procedure = new Procedure();
@@ -23,7 +34,7 @@ export function NewProcedureDialog({ confermCallback, saveStatusCallback }) {
           procedure.procedureTypeId = procedureType;
 
           createNewProcedure(procedure, () => {
-            saveStatusCallback?.call();
+            onCancelClick();
           });
         }
       }}

@@ -1,11 +1,7 @@
-import { useContext } from "react";
 import { TableHeader } from "../table.header";
-import { AppContext } from "../../../../../business_logic/context/app_context";
 import { SortType } from "../../../../../business_logic/utils";
 
 export function ActivityHeader() {
-  const sortData = useContext(AppContext).sortData;
-
   const headers = [
     null,
     "Data",
@@ -31,21 +27,13 @@ export function ActivityHeader() {
     null,
     SortType.urgency,
     null,
-    null
+    null,
   ];
 
   return (
     <TableHeader>
       {headers.map((e) => {
-        return (
-          <th
-            onClick={() => {
-              sortData(headersSort.at(headers.indexOf(e)));
-            }}
-          >
-            {e ?? ""}
-          </th>
-        );
+        return <th>{e ?? ""}</th>;
       })}
     </TableHeader>
   );

@@ -1,27 +1,21 @@
-import { useContext, useState } from "react";
+import {useState } from "react";
 import "./activity_row.css";
-import {
-  AppContext,
-  ShowDialogContext,
-} from "../../../../../business_logic/context/app_context";
 import {
   dateFormatter,
   findElementInList,
 } from "../../../../../business_logic/utils";
 import { TableRow } from "../table.row";
-import {
-  DeleteDialogState,
-  EditActivityDialogState,
-} from "../../../dialogs/dialog_states";
-import {
-  deleteActivity,
-} from "../../../../../business_logic/network.repository";
+import { useDispatch, useSelector } from "react-redux";
+import { selectConstants } from "../../../../../store/store";
+import { dialogSlice } from "../../../../../store/slices/dialog.slice";
+import { deleteActivity } from "../../../../../business_logic/network.repository";
 
 export function ActivityRow({ activity, isEven }) {
-  const data = useContext(AppContext)["constantData"];
-  const showDialog = useContext(ShowDialogContext);
 
   const [selectedRow, setSelectedRow] = useState(false);
+
+  const constantSelector = useSelector(selectConstants);
+  const dispatch = useDispatch();
 
   function createUrgencyTitle() {
     var tdClassed = "";
@@ -41,7 +35,57 @@ export function ActivityRow({ activity, isEven }) {
 
   const rowId = "row-" + activity.uid;
 
+
   return (
+    <TableRow
+      id={rowId}
+      className={!selectedRow ? isEven && "grey-row" : "selectedRow"}
+    >
+      <td>
+        <input
+          type="checkbox"
+          onChange={() => {
+            setSelectedRow(!selectedRow);
+          }}
+        />
+      </td>
+      <td>{dateFormatter.format(activity.creationDate)}</td>
+      <td>
+        {findElementInList(constantSelector.procedures, activity.procedureId)}
+      </td>
+      <td>
+        {activity.alternativeName === null
+          ? findElementInList(
+              constantSelector.recurrence,
+              activity.recurrenceId
+            )
+          : activity.alternativeName}
+      </td>
+      <td>{dateFormatter.format(activity.deadline)}</td>
+      <td>
+        {findElementInList(constantSelector.operators, activity.operatorId)}
+      </td>
+      <td>
+        {findElementInList(constantSelector.activityStates, activity.stateId)}
+      </td>
+      <td>{activity.notes}</td>
+      <td>{createUrgencyTitle()}</td>
+      <td className="pointer" onClick={() => {
+        dispatch(dialogSlice.actions.editActivity(activity));
+      }}>
+        <span className="material-symbols-outlined">edit</span>
+      </td>
+      <td className="pointer" onClick={() => {
+        dispatch(dialogSlice.actions.deleteAlert(() => {
+          deleteActivity(activity.uid);
+        }));
+
+      }}>
+        <span className="material-symbols-outlined">delete</span>
+      </td>
+    </TableRow>
+  );
+  /*return (
     <TableRow
       id={rowId}
       className={!selectedRow ? isEven && "grey-row" : "selectedRow"}
@@ -90,5 +134,5 @@ export function ActivityRow({ activity, isEven }) {
         <span class="material-symbols-outlined">delete</span>
       </td>
     </TableRow>
-  );
+  );*/
 }

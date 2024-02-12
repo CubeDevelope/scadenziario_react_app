@@ -3,9 +3,14 @@ import { TableHeader } from "../../components/table/headers/table.header";
 import Table from "../../components/table/table";
 import { AppContext } from "../../../business_logic/context/app_context";
 import { OperatorRow } from "../../components/table/rows/operator_row/operator_row";
+import { useDispatch, useSelector } from "react-redux";
+import { selectOperators } from "../../../store/store";
 
-export function OperatorsListPage() {
-  const operators = useContext(AppContext).constantData.operators;
+export function OperatorsList() {
+  const operators = useSelector(selectOperators);
+  
+
+  const dispatch = useDispatch();
 
   return (
     <Table
@@ -23,6 +28,7 @@ export function OperatorsListPage() {
           <OperatorRow
             operator={operator}
             isEven={operators.indexOf(operator) % 2 === 0}
+            dispatch={dispatch}
           />
         );
       })}

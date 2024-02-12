@@ -50,13 +50,7 @@ function App() {
   const [tableVisible, setVisibleTable] = useState(0);
   const [currentSort, setCurrentSort] = useState(SortSubtype.deadlineDown);
 
-  const [constantData, setConstantData] = useState({
-    procedures: [],
-    operators: [],
-    activityStates: [],
-    recurrence: [],
-    procedureTypes: [],
-  });
+ 
 
   const [loading, setLoading] = useState(true);
 

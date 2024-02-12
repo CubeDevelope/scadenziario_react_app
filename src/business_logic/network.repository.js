@@ -1,10 +1,13 @@
 import Activity from "../models/activity.model";
+import ActivityState from "../models/activity_state.model";
 import Operator from "../models/operator.model";
 import { Procedure } from "../models/procedure.model";
+import { ProcedureType } from "../models/procedure_type.model";
+import Recurrence from "../models/recurrence.model";
 import { baseUrl } from "./utils";
 
 export const getActiviesFromBE = async (callback) => {
-  const activities = [];
+  var activities = [];
   const data = await fetch(baseUrl + "/getActivities").catch((err) => {
     callback(activities, err);
     throw err;
@@ -13,8 +16,8 @@ export const getActiviesFromBE = async (callback) => {
   data
     .json()
     .then((result) => {
-      result["activities"].forEach((element) => {
-        activities.push(Activity.fromJson(element));
+      activities = result["activities"].map((element) => {
+        return Activity.fromJson(element);
       });
       callback(activities, null);
     })
@@ -27,7 +30,6 @@ export const getActiviesFromBE = async (callback) => {
 export const getProcedures = async (callback) => {
   const procedures = [];
   const data = await fetch(baseUrl + "/getProcedures").catch((err) => {
-    callback(procedures, err);
     throw err;
   });
 
@@ -46,22 +48,54 @@ export const getProcedures = async (callback) => {
 };
 
 export const getOperators = async (callback) => {
-  const operators = [];
+  var operators = [];
   const data = await fetch(baseUrl + "/getOperators").catch((err) => {
-    callback(operators, err);
     throw err;
   });
 
   data
     .json()
     .then((result) => {
-      result["operators"].forEach((element) => {
-        operators.push(Operator.fromJson(element));
+      operators = result["operators"].map((element) => {
+        return Operator.fromJson(element);
       });
-      callback(operators, null);
+      callback(operators);
     })
     .catch((err) => {
-      callback(operators, err);
+      throw err;
+    });
+};
+
+export const getConstantValues = async (callback) => {
+  const data = await fetch(baseUrl + "/getConstantValues").catch((err) => {
+    callback({}, err);
+    throw err;
+  });
+  data
+    .json()
+    .then((result) => {
+      const map = {};
+
+      map["operators"] = result["operators"].map((element) => {
+        return Operator.fromJson(element);
+      });
+      map["procedures"] = result["procedures"].map((element) => {
+        return Procedure.fromJson(element);
+      });
+      map["activityStates"] = result["activityStates"].map((element) => {
+        return ActivityState.fromJson(element);
+      });
+      map["recurrence"] = result["recurrence"].map((element) => {
+        return Recurrence.fromJson(element);
+      });
+      map["procedureTypes"] = result["procedureTypes"].map((element) => {
+        return ProcedureType.fromJson(element);
+      });
+
+      callback(map, null);
+    })
+    .catch((err) => {
+      callback({}, err);
       throw err;
     });
 };
@@ -111,8 +145,6 @@ export const deleteActivity = (activityId) => {
   });
 };
 
-
-
 export const deleteOperator = (operatorId) => {
   fetch(baseUrl + "/deleteOperator", {
     mode: "cors",
@@ -124,7 +156,6 @@ export const deleteOperator = (operatorId) => {
   });
 };
 
-
 export const deleteProcedure = (procedureId) => {
   fetch(baseUrl + "/deleteProcedure", {
     mode: "cors",
@@ -135,8 +166,6 @@ export const deleteProcedure = (procedureId) => {
     body: JSON.stringify({ uid: procedureId }),
   });
 };
-
-
 
 const defaultCall = async (url, data, callType) => {
   await fetch(baseUrl + url, {

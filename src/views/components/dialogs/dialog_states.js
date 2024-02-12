@@ -1,4 +1,3 @@
-
 class DialogState {}
 
 class EditDialogState extends DialogState {
@@ -16,7 +15,12 @@ class CreateDialogState extends DialogState {
   }
 }
 
-export class UrgencyDialogState extends DialogState {}
+export class UrgencyDialogState extends DialogState {
+  constructor(activities) {
+    super();
+    this.activities = activities ?? [];
+  }
+}
 
 export class DeleteDialogState extends DialogState {
   constructor(callback) {
@@ -30,23 +34,20 @@ export class DeleteDialogState extends DialogState {
 export class EditActivityDialogState extends EditDialogState {
   constructor(activityToEdit) {
     super(activityToEdit, (activity) => {
-        console.log(activity);
+      console.log(activity);
     });
   }
 }
 
-export class CreateActivityDialogState extends CreateDialogState {
-  
-}
+export class CreateActivityDialogState extends CreateDialogState {}
 export class CreateProcedureDialogState extends CreateDialogState {}
 
 export class CreateOperatorDialogState extends CreateDialogState {}
 
-
 export class EditOperatorDialogState extends EditDialogState {
   constructor(operatorToEdit) {
     super(operatorToEdit, (activity) => {
-        console.log(activity);
+      console.log(activity);
     });
   }
 }
