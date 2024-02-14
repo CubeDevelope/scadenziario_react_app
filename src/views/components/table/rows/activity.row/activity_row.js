@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import "./activity_row.css";
 import {
   dateFormatter,
@@ -11,7 +11,6 @@ import { dialogSlice } from "../../../../../store/slices/dialog.slice";
 import { deleteActivity } from "../../../../../business_logic/network.repository";
 
 export function ActivityRow({ activity, isEven }) {
-
   const [selectedRow, setSelectedRow] = useState(false);
 
   const constantSelector = useSelector(selectConstants);
@@ -35,6 +34,25 @@ export function ActivityRow({ activity, isEven }) {
 
   const rowId = "row-" + activity.uid;
 
+  return (
+    <TableRow
+      leading={findElementInList(
+        constantSelector.procedures,
+        activity.procedureId
+      )}
+      title={activity.alternativeName === null
+        ? findElementInList(
+            constantSelector.recurrence,
+            activity.recurrenceId
+          )
+        : activity.alternativeName}
+      tailing={createUrgencyTitle()}
+    >
+      <div data-cell="Data creazione: ">{dateFormatter.format(activity.creationDate)}</div>
+    </TableRow>
+  );
+
+  /*
 
   return (
     <TableRow

@@ -11,16 +11,15 @@
   border-radius: 16px;
   padding: 16px;
   color: black;
-  transition: all .2s;
-
+  transition: all 0.2s;
 }
 
 .buttonContainer {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
-    margin-top: 1rem;
-    column-gap: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-top: 1rem;
+  column-gap: 16px;
 }
 
 .dialog select {
@@ -59,4 +58,15 @@ input[type="date"] {
 .dialogTitle {
   text-align: center;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 650px) {
+  .dialog {
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+    transform: none;
+  }
 }
