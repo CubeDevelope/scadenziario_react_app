@@ -49,6 +49,10 @@ export default function Root() {
         addActivity();
       });
 
+      ioConnection.on("server_error", (error) => {
+        console.log(error);
+      });
+
       ioConnection.on("update_constants", (update) => {
         switch (update) {
           case "procedure":

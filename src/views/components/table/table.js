@@ -5,7 +5,6 @@ export default function Table({ children, header, titleComponents }) {
   return (
     <table>
       <thead>{header}</thead>
-
       <tbody>{children}</tbody>
     </table>
   );

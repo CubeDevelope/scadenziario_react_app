@@ -9,12 +9,7 @@ export function BaseDialog({
   description = "",
 }) {
   return (
-    <div
-      className="dialog"
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
-    >
+    <dialog open className="dialog">
       <h3 className="dialogTitle">{title}</h3>
       <h4>{description}</h4>
       {children}
@@ -29,6 +24,6 @@ export function BaseDialog({
           {buttonTitle}
         </button>
       </div>
-    </div>
+    </dialog>
   );
 }

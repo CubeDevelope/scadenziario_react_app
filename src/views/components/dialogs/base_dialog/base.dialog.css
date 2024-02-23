@@ -12,6 +12,7 @@
   padding: 16px;
   color: black;
   transition: all 0.2s;
+  border: none;
 }
 
 .buttonContainer {
