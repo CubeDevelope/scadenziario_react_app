@@ -1,54 +1,7 @@
 .tableRow {
   width: 100%;
+  min-height: 30px;
   display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid grey;
-}
-
-.table_tile {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  cursor: pointer;
-  justify-content: space-between;
-  padding: 8px;
-}
-
-.info_tile {
-  transition: 250ms;
-  overflow-y: hidden;
-  padding-left: 8;
-  height: 0;
-}
-
-.mobile_tile {
-  display: none;
-  flex-direction: column;
-}
-
-.desktop_tile {
-  display: block;
-}
-
-@media screen and (max-width: 600px) {
-  .tableRow {
-    flex-direction: column;
-  }
-
-  .mobile_tile {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .desktop_tile {
-    display: none;
-  }
-
-  .info_tile > *::before {
-    content: attr(data-cell);
-    font-size: .9rem;
-    font-weight: bold;
-  }
+  border-bottom: 2px solid #c3c3c3;
+  padding: 16px 8px;
 }

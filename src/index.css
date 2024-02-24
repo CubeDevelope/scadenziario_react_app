@@ -81,6 +81,12 @@ code {
   flex-direction: column;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .pointer:hover {
   cursor: pointer;
 }
