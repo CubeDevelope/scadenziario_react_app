@@ -43,8 +43,8 @@ export default function Root() {
 
   useEffect(() => {
     const connectIoSocket = () => {
-      //const ioConnection = io("ws://192.168.14.4:4000"); //TODO
-      const ioConnection = io("ws://localhost:4000"); //TODO
+      const ioConnection = io("ws://192.168.14.4:4000"); //TODO
+      //const ioConnection = io("ws://localhost:4000"); //TODO
 
       ioConnection.on("update_activities", () => {
         addActivity();
