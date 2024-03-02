@@ -32,6 +32,7 @@ export default class Activity {
     this.notes = notes ?? "";
   }
 
+
   static fromJson(map) {
     return new Activity(
       map["uid"],

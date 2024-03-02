@@ -35,6 +35,10 @@ export function findElementInList(list, id, onChange) {
   return "";
 }
 
+export function sanityzeText(text) {
+  return text.replace("$sap","'")
+}
+
 export const SortType = {
   date: "date",
   procedure: "procedure",

@@ -3,6 +3,7 @@ import "./activity_row.css";
 import {
   dateFormatter,
   findElementInList,
+  sanityzeText,
 } from "../../../../../business_logic/utils";
 import { TableRow } from "../table.row";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,9 +28,8 @@ export function ActivityRow({ activity, isEven }) {
     if (diffence > 30) tdClassed += "greenDot";
     if (diffence <= 30 && diffence > 15) tdClassed += "yellowDot";
     if (diffence <= 15 && diffence > 7) tdClassed += "orangeDot";
-    if (diffence <= 7 ) tdClassed += "redDot";
-    if (diffence <= 3 ) tdClassed += " animatedDot";
-
+    if (diffence <= 7) tdClassed += "redDot ";
+    if (diffence <= 3) tdClassed += "animatedDot";
 
     return <p className={tdClassed} />;
   }
@@ -59,7 +59,7 @@ export function ActivityRow({ activity, isEven }) {
               constantSelector.recurrence,
               activity.recurrenceId
             )
-          : activity.alternativeName}
+          : sanityzeText(activity.alternativeName)}
       </td>
       <td>{dateFormatter.format(activity.deadline)}</td>
       <td>
@@ -92,54 +92,4 @@ export function ActivityRow({ activity, isEven }) {
       </td>
     </TableRow>
   );
-  /*return (
-    <TableRow
-      id={rowId}
-      className={!selectedRow ? isEven && "grey-row" : "selectedRow"}
-    >
-      <td>
-        {" "}
-        <input
-          type="checkbox"
-          onChange={() => {
-            setSelectedRow(!selectedRow);
-          }}
-        />
-      </td>
-      <td>{dateFormatter.format(activity.creationDate)}</td>
-      <td>{findElementInList(data.procedures, activity.procedureId)}</td>
-      <td>
-        {activity.ordinary !== null
-          ? findElementInList(data.recurrence, activity.recurrenceId)
-          : activity.other}
-      </td>
-      <td>{dateFormatter.format(activity.deadline)}</td>
-      <td>{findElementInList(data.operators, activity.operatorId)}</td>
-      <td>
-      {findElementInList(data.activityStates, activity.stateId)}
-      </td>
-      <td>{activity.notes}</td>
-      <td>{createUrgencyTitle()}</td>
-      <td
-        className="pointer"
-        onClick={() => {
-          showDialog(new EditActivityDialogState(activity));
-        }}
-      >
-        <span class="material-symbols-outlined">edit</span>
-      </td>
-      <td
-        className="pointer"
-        onClick={() => {
-          showDialog(
-            new DeleteDialogState(() => {
-              deleteActivity(activity.uid);
-            })
-          );
-        }}
-      >
-        <span class="material-symbols-outlined">delete</span>
-      </td>
-    </TableRow>
-  );*/
 }
