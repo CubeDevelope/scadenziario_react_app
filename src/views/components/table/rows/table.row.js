@@ -1,8 +1,13 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./table.row.css";
 
-export function TableRow({ id, children, style}) {
-  const parentHeight = useRef();
-
-  return <div className="tableRow" style={style}>{children}</div>;
+export function TableRow({ children, className, id }) {
+  function buildClassName() {
+    return "tableRow " + className;
+  }
+  return (
+    <tr id={id} className={buildClassName()}>
+      {children}
+    </tr>
+  );
 }

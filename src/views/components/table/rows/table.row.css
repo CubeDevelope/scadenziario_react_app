@@ -1,7 +1,27 @@
 .tableRow {
   width: 100%;
-  min-height: 30px;
+}
+
+.table_tile {
+  height: 50px;
+  width: 100%;
   display: flex;
-  border-bottom: 2px solid #c3c3c3;
-  padding: 16px 8px;
+  align-items: center;
+  border-bottom: 1px solid grey;
+  padding-left: 10px;
+  
+}
+
+.table_tile div {
+  height: 24px;
+}
+
+.info_tile {
+  background-color: rebeccapurple;
+  transition: all 250ms;
+}
+
+@media screen and (max-width: 600px){
+  .tableRow {
+  }
 }

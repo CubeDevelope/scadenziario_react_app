@@ -1,65 +1,84 @@
+import { useState } from "react";
+import "./activity_row.css";
 import {
   dateFormatter,
   findElementInList,
 } from "../../../../../business_logic/utils";
-import { selectConstants } from "../../../../../store/store";
 import { TableRow } from "../table.row";
 import { useDispatch, useSelector } from "react-redux";
+import { selectConstants } from "../../../../../store/store";
 import { dialogSlice } from "../../../../../store/slices/dialog.slice";
 import { deleteActivity } from "../../../../../business_logic/network.repository";
 
-import "./activity_row.css";
-import { useState } from "react";
-
 export function ActivityRow({ activity, isEven }) {
+  const [selectedRow, setSelectedRow] = useState(false);
+
   const constantSelector = useSelector(selectConstants);
   const dispatch = useDispatch();
 
-  const [isSelected, selectRow] = useState(false);
+  function createUrgencyTitle() {
+    var tdClassed = "";
+
+    const diffence = Math.ceil(
+      (activity.deadline - Date.now()) / (1000 * 60 * 60 * 24)
+    );
+
+    tdClassed = "dot ";
+    if (diffence > 30) tdClassed += "greenDot";
+    if (diffence <= 30 && diffence > 15) tdClassed += "yellowDot";
+    if (diffence <= 15 && diffence > 7) tdClassed += "orangeDot";
+    if (diffence <= 7) tdClassed += "redDot ";
+    if (diffence <= 3) tdClassed += "animatedDot";
+
+    return <p className={tdClassed} />;
+  }
+
+  const rowId = "row-" + activity.uid;
 
   return (
-    <TableRow style={{ backgroundColor: isSelected ? "red" : "transparent" }}>
-      <div className="center" style={{ padding: "0 8px" }}>
+    <TableRow
+      id={rowId}
+      className={!selectedRow ? isEven && "grey-row" : "selectedRow"}
+    >
+      <td>
         <input
           type="checkbox"
           onChange={() => {
-            selectRow(!isSelected);
+            setSelectedRow(!selectedRow);
           }}
         />
-      </div>
-      <div className="tableCell">
-        {dateFormatter.format(activity.creationDate)}
-      </div>
-      <div className="tableCell" >
+      </td>
+      <td>{dateFormatter.format(activity.creationDate)}</td>
+      <td>
         {findElementInList(constantSelector.procedures, activity.procedureId)}
-      </div>
-      <div className="tableCell" style={{flexGrow : 2}}>
+      </td>
+      <td>
         {activity.alternativeName === null
           ? findElementInList(
               constantSelector.recurrence,
               activity.recurrenceId
             )
           : activity.alternativeName}
-      </div>
-      <div className="tableCell">{dateFormatter.format(activity.deadline)}</div>
-      <div className="tableCell">
+      </td>
+      <td>{dateFormatter.format(activity.deadline)}</td>
+      <td>
         {findElementInList(constantSelector.operators, activity.operatorId)}
-      </div>
-      <div className="tableCell">
+      </td>
+      <td>
         {findElementInList(constantSelector.activityStates, activity.stateId)}
-      </div>
-      <div className="tableCell" style={{flexGrow : 2}}>{activity.notes}</div>
-      <div></div>
-      <div
-        className="pointer tableCellIcon"
+      </td>
+      <td>{activity.notes}</td>
+      <td>{createUrgencyTitle()}</td>
+      <td
+        className="pointer"
         onClick={() => {
           dispatch(dialogSlice.actions.editActivity(activity));
         }}
       >
         <span className="material-symbols-outlined">edit</span>
-      </div>
-      <div
-        className="pointer tableCellIcon"
+      </td>
+      <td
+        className="pointer"
         onClick={() => {
           dispatch(
             dialogSlice.actions.deleteAlert(() => {
@@ -69,64 +88,7 @@ export function ActivityRow({ activity, isEven }) {
         }}
       >
         <span className="material-symbols-outlined">delete</span>
-      </div>
+      </td>
     </TableRow>
   );
 }
-
-/*return (
-        <TableRow
-        id={rowId}
-        className={!selectedRow ? isEven && "grey-row" : "selectedRow"}
-      >
-        <td>
-          <input
-            type="checkbox"
-            onChange={() => {
-              setSelectedRow(!selectedRow);
-            }}
-          />
-        </td>
-        <td>{dateFormatter.format(activity.creationDate)}</td>
-        <td>
-          {findElementInList(constantSelector.procedures, activity.procedureId)}
-        </td>
-        <td>
-          {activity.alternativeName === null
-            ? findElementInList(
-                constantSelector.recurrence,
-                activity.recurrenceId
-              )
-            : activity.alternativeName}
-        </td>
-        <td>{dateFormatter.format(activity.deadline)}</td>
-        <td>
-          {findElementInList(constantSelector.operators, activity.operatorId)}
-        </td>
-        <td>
-          {findElementInList(constantSelector.activityStates, activity.stateId)}
-        </td>
-        <td>{activity.notes}</td>
-        <td>{createUrgencyTitle()}</td>
-        <td
-          className="pointer"
-          onClick={() => {
-            dispatch(dialogSlice.actions.editActivity(activity));
-          }}
-        >
-          <span className="material-symbols-outlined">edit</span>
-        </td>
-        <td
-          className="pointer"
-          onClick={() => {
-            dispatch(
-              dialogSlice.actions.deleteAlert(() => {
-                deleteActivity(activity.uid);
-              })
-            );
-          }}
-        >
-          <span className="material-symbols-outlined">delete</span>
-        </td>
-      </TableRow>
-      );*/
