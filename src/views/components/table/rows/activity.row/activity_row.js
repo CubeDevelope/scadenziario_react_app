@@ -30,7 +30,7 @@ export function ActivityRow({ activity, isEven }) {
       if (diffence > 30) tdClassed += "greenDot";
       if (diffence <= 30 && diffence > 15) tdClassed += "yellowDot";
       if (diffence < 15 && diffence > 7) tdClassed += "orangeDot";
-      if (diffence <= 7) tdClassed += "redDot";
+      if (diffence <= 7) tdClassed += "redDot ";
       if (diffence <= 3) tdClassed += "animatedDot";
     }
 
