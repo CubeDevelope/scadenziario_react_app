@@ -10,13 +10,16 @@
 
 .redDot {
   background-color: red;
-  
 }
 
 .animatedDot {
   animation: flashDot 100ms linear infinite alternate-reverse;
 }
 
+.expired {
+  border: 5px solid black;
+  color: black;
+}
 
 @keyframes flashDot {
   from {
@@ -57,4 +60,3 @@
   display: flex;
   align-items: center;
 }
-

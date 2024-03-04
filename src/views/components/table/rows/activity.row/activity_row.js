@@ -24,14 +24,17 @@ export function ActivityRow({ activity, isEven }) {
       (activity.deadline - Date.now()) / (1000 * 60 * 60 * 24)
     );
 
-    tdClassed = "dot ";
-    if (diffence > 30) tdClassed += "greenDot";
-    if (diffence <= 30 && diffence > 15) tdClassed += "yellowDot";
-    if (diffence <= 15 && diffence > 7) tdClassed += "orangeDot";
-    if (diffence <= 7) tdClassed += "redDot ";
-    if (diffence <= 3) tdClassed += "animatedDot";
+    if (diffence <= 0) tdClassed = "expired";
+    else {
+      tdClassed = "dot ";
+      if (diffence > 30) tdClassed += "greenDot";
+      if (diffence <= 30 && diffence > 15) tdClassed += "yellowDot";
+      if (diffence < 15 && diffence > 7) tdClassed += "orangeDot";
+      if (diffence <= 7) tdClassed += "redDot";
+      if (diffence <= 3) tdClassed += "animatedDot";
+    }
 
-    return <p className={tdClassed} />;
+    return <p className={tdClassed}>{tdClassed == "expired" && "Scaduta"}</p>;
   }
 
   const rowId = "row-" + activity.uid;

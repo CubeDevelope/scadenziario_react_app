@@ -7,7 +7,7 @@ export const activitiesSlice = createSlice({
   },
   reducers: {
     setActivities: (_, activities) => {
-      return { data: activities.payload };
+      return { data: activities.payload.sort((date1, date2) => date1 - date2) };
     },
   },
 });
@@ -46,8 +46,8 @@ export const screenSizeSlice = createSlice({
   reducers: {
     changeSize: (state, size) => {
       return size.payload;
-    }
-  }
+    },
+  },
 });
 
 //Reducers
