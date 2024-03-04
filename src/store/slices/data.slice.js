@@ -7,7 +7,7 @@ export const activitiesSlice = createSlice({
   },
   reducers: {
     setActivities: (_, activities) => {
-      return { data: activities.payload.sort((date1, date2) => date1 - date2) };
+      return { data: activities.payload.sort((activity1, activity2) => activity1.deadline - activity2.deadline) };
     },
   },
 });
