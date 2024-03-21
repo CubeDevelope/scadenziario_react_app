@@ -1,16 +1,14 @@
-import { updateActivity } from "../../../../../business_logic/network.repository";
-import {
-  createOptions,
-} from "../../../../../business_logic/utils";
-import { BaseDialog } from "../../base_dialog/base.dialog";
+import { createOptions } from "../../../../../business_logic/utils";
 import { TitleDialogElement } from "../../components/title_dialog_element.component";
 import { EditActivityDialogState } from "../../dialog_states";
 import { useSelector } from "react-redux";
 import { selectConstants } from "../../../../../store/store";
+import EditDialog from "../edit.dialog";
+import { updateActivity } from "../../../../../business_logic/network.repository";
 
 export function EditActivityDialog({
   state = new EditActivityDialogState(),
-  onCancelClick, 
+  onCancelClick,
   onConfirmCallback,
 }) {
   const activity = state.elementToEdit;
@@ -19,20 +17,9 @@ export function EditActivityDialog({
   const data = useSelector(selectConstants);
 
   return (
-    <BaseDialog
-      onConfirmCallback={onConfirmCallback}
-      onSaveButton={() => {
-        updateActivity(activity);
-        onCancelClick();
-      }}
-      actions={() => {
-        return (
-          <button className="secondaryButton" onClick={onCancelClick}>
-            Annulla
-          </button>
-        );
-      }}
-    >
+    <EditDialog onCancelClick={onCancelClick} onSaveClick={(activity) => {
+      updateActivity(activity, onCancelClick);
+    }}>
       <TitleDialogElement id="operators" title="Operatore">
         {createOptions(data.operators, "operatorsSelector", (event) => {
           activity.operatorId = event.target.value;
@@ -71,6 +58,6 @@ export function EditActivityDialog({
           {activity.notes}
         </textarea>
       </TitleDialogElement>
-    </BaseDialog>
+    </EditDialog>
   );
 }

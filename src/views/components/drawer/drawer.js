@@ -33,6 +33,14 @@ export function Drawer({ isVisible, dispatch }) {
         }}
         leading={<span className="material-symbols-outlined">home</span>}
       />
+      <ListTile
+        title={"Attività standard"}
+        onTap={() => {
+          router("/recurrence");
+          dispatch(dialogSlice.actions.hideAll());
+        }}
+        leading={<span className="material-symbols-outlined">home</span>}
+      />
     </div>
   );
 }

@@ -23,6 +23,7 @@ import {
   CreateProcedureDialogState,
   DeleteDialogState,
   EditActivityDialogState,
+  EditRecurrenceDialogState,
   UrgencyDialogState,
 } from "../views/components/dialogs/dialog_states";
 import { EditActivityDialog } from "../views/components/dialogs/edit.dialog/activity.edit.dialog/activity.edit.dialog";
@@ -33,6 +34,8 @@ import { ProceduresList } from "../views/pages/procedures_list/procedures_list.p
 import { OperatorsList } from "../views/pages/operators_list/operators_list.page";
 import { Splashpage } from "../views/pages/splash_page/splash.page";
 import { io } from "socket.io-client";
+import { RecurrenceList } from "../views/pages/recurrence_list/recurrenec_list.page";
+import { EditRecurrenceDialog } from "../views/components/dialogs/edit.dialog/recurrence.edit.dialog";
 
 export default function Root() {
   const dialogSelector = useSelector(selectDialog);
@@ -132,6 +135,14 @@ export default function Root() {
           />
         );
 
+        case EditRecurrenceDialogState:
+        return (
+          <EditRecurrenceDialog
+            state={dialogSelector.type}
+            onCancelClick={hideDialog}
+          />
+        );
+
       case UrgencyDialogState:
         return (
           <UrgencyDialog
@@ -176,6 +187,7 @@ export default function Root() {
           <Route path="/activities" element={<ActivitiesList />} />
           <Route path="/procedures" element={<ProceduresList />} />
           <Route path="/operators" element={<OperatorsList />} />
+          <Route path="/recurrence" element={<RecurrenceList />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>

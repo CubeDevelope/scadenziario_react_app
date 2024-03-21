@@ -1,3 +1,5 @@
+
+
 class DialogState {}
 
 class EditDialogState extends DialogState {
@@ -14,6 +16,7 @@ class CreateDialogState extends DialogState {
     this.callback = callback;
   }
 }
+
 
 export class UrgencyDialogState extends DialogState {
   constructor(activities) {
@@ -36,6 +39,17 @@ export class EditActivityDialogState extends EditDialogState {
     super(activityToEdit, (activity) => {
       console.log(activity);
     });
+  }
+}
+
+
+export class EditRecurrenceDialogState extends EditDialogState {
+  constructor(recurrenceToEdit, elements) {
+    super(recurrenceToEdit, (recurrence) => {
+      
+    });
+
+    this.elements = elements;
   }
 }
 
