@@ -5,6 +5,7 @@ import {
   CreateProcedureDialogState,
   DeleteDialogState,
   EditActivityDialogState,
+  EditRecurrenceDialogState,
   UrgencyDialogState,
 } from "../../views/components/dialogs/dialog_states";
 
@@ -13,6 +14,7 @@ export const dialogSlice = createSlice({
   initialState: {
     dialogVisible: false,
     drawerVisible: false,
+    newElementVisible: false,
     type: new DeleteDialogState(),
   },
   reducers: {
@@ -22,6 +24,12 @@ export const dialogSlice = createSlice({
         drawerVisible: true,
       };
     },
+    /*openNewElement: (state) => {
+      return {
+        ...state,
+        newElementVisible: true,
+      }
+    },*/
     urgencyDialog: (_, activities) => {
       return {
         dialogVisible: true,
@@ -56,6 +64,12 @@ export const dialogSlice = createSlice({
         type: new EditActivityDialogState(activity.payload),
       };
     },
+    editRecurrence: (_, recurrence) => {
+      return {
+        dialogVisible: true,
+        type: new EditRecurrenceDialogState(recurrence.payload),
+      };
+    },
     deleteAlert: (_, callback) => {
       return {
         drawerVisible: false,
@@ -73,11 +87,26 @@ export const dialogSlice = createSlice({
       };
     },
 
+    /*hideNewElement: (state) => {
+      return {
+        ...state,
+        newElementVisible: false,
+      };
+    },*/
+
     hideAll: (state) => {
       return {
         ...state,
         drawerVisible: false,
         dialogVisible: false,
+        newElementVisible: false,
+      };
+    },
+
+    hideNewElement: (state) => {
+      return {
+        ...state,
+        newElementVisible: false,
       };
     },
 
@@ -95,7 +124,10 @@ export const {
   deleteAlert,
   hideDialog,
   editActivity,
+  editRecurrence,
   createActivity,
   createOperator,
   createProcedure,
+  //openNewElement,
+  //hideNewElement
 } = dialogSlice.actions;
