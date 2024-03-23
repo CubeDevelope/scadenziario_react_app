@@ -35,6 +35,11 @@ export default function NewRowTile({
         >
           Operatore
         </DropdownElement>
+        <DropdownElement
+          
+        >
+          Attività standard
+        </DropdownElement>
       </DropdownButton>
       <button
         className="secondaryButton"

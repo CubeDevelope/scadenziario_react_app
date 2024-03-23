@@ -1,7 +1,5 @@
-import { useContext, useState } from "react";
-import { ShowDialogContext } from "../../../../../business_logic/context/app_context";
+import { useState } from "react";
 import { TableRow } from "../table.row";
-import { DeleteDialogState } from "../../../dialogs/dialog_states";
 import { deleteOperator } from "../../../../../business_logic/network.repository";
 import { dialogSlice } from "../../../../../store/slices/dialog.slice";
 
