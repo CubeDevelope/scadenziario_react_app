@@ -1,0 +1,28 @@
+.dd-wrapper {
+    position: relative;
+}
+
+.dd-menu {
+    z-index: 2;
+    position: absolute;
+    top: 40px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.dd-element {
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: white;
+    cursor: pointer;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.dd-element:hover {
+    background-color: #eee;
+}

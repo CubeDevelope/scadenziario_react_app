@@ -3,9 +3,10 @@
     display: flex;
     columns: 8px;
     margin: 1rem 0 ;
+    justify-content: space-between;
 }
 
-#new_row_tile div {
+#new_row_tile {
     flex: 1;
     display: flex;
     column-gap: 16px;
@@ -18,3 +19,7 @@
     border-radius: 8px;
     border: none;
 } 
+
+.dropdown_button {
+    position: relative;
+}

@@ -24,12 +24,12 @@ export const dialogSlice = createSlice({
         drawerVisible: true,
       };
     },
-    /*openNewElement: (state) => {
+    openNewElement: (state) => {
       return {
         ...state,
         newElementVisible: true,
       }
-    },*/
+    },
     urgencyDialog: (_, activities) => {
       return {
         dialogVisible: true,
@@ -87,12 +87,12 @@ export const dialogSlice = createSlice({
       };
     },
 
-    /*hideNewElement: (state) => {
+    hideNewElement: (state) => {
       return {
         ...state,
         newElementVisible: false,
       };
-    },*/
+    },
 
     hideAll: (state) => {
       return {
@@ -128,6 +128,6 @@ export const {
   createActivity,
   createOperator,
   createProcedure,
-  //openNewElement,
-  //hideNewElement
+  openNewElement,
+  hideNewElement
 } = dialogSlice.actions;
